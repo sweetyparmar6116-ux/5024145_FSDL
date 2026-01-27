@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Class selector */
+.section {
+    margin: 20px;
+}
+
+/* List styling */
+ul li {
+    color: #2c3e50;
+}
+
+/* Table styling */
+table {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+/* Pseudo class */
+input:focus {
+    background-color: #ffffcc;
+}
+
+/* Pseudo element */
+h2::after {
+    content: " ✔";
+    color: green;
+}
