@@ -1,40 +1,87 @@
+/* CSS Syntax */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
 }
 
-/* Class selector */
-.section {
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #004aad, #0077ff);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Class Selector */
+.tagline {
+    font-style: italic;
+}
+
+/* Element Selector */
+section {
+    background-color: white;
     margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-/* List styling */
-ul li {
-    color: #2c3e50;
-}
-
-/* Table styling */
+/* Table Styling */
 table {
+    width: 100%;
     border-collapse: collapse;
-    width: 80%;
+    margin-top: 10px;
 }
 
 th {
-    background-color: #3498db;
+    background-color: #0077ff;
     color: white;
 }
 
 td, th {
-    border: 1px solid black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* List Styling */
+.tech-list li {
+    color: #004aad;
+    font-weight: bold;
+}
+
+/* CSS3 Pseudo-class */
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+/* Form Inputs */
+input, select, textarea {
+    padding: 6px;
+    margin-top: 5px;
+}
+
+/* CSS3 Pseudo-element */
+h2::first-letter {
+    font-size: 30px;
+    color: #0077ff;
+}
+
+/* Image Styling */
+.college-img {
+    width: 300px;
+    height: 200px;
+    border: 3px solid #004aad;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
     padding: 10px;
 }
 
-/* Pseudo class */
-input:focus {
-    background-color: #ffffcc;
-}
-
-/* Pseudo element */
-h2::after {
-    content: " ✔";
-    color: green;
-}
