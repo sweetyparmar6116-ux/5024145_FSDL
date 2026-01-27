@@ -1,87 +1,78 @@
-/* CSS Syntax */
+/* ---------- GENERAL BODY ---------- */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-    margin: 0;
-    padding: 0;
-}
-
-/* Header Styling */
-header {
-    background: linear-gradient(to right, #004aad, #0077ff);
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Class Selector */
-.tagline {
-    font-style: italic;
-}
-
-/* Element Selector */
-section {
-    background-color: white;
+    background-color: #f4f6f9;
     margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
+    line-height: 1.5;
 }
 
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th {
-    background-color: #0077ff;
-    color: white;
-}
-
-td, th {
-    border: 1px solid #ccc;
-    padding: 10px;
+/* ---------- HEADINGS ---------- */
+h1 {
+    color: #003366;
     text-align: center;
 }
 
-/* List Styling */
-.tech-list li {
-    color: #004aad;
-    font-weight: bold;
+h2 {
+    color: #0055aa;
 }
 
-/* CSS3 Pseudo-class */
+h3 {
+    color: #0077cc;
+}
+
+/* ---------- LINKS ---------- */
+a {
+    color: blue;
+    text-decoration: none;
+}
+
 a:hover {
     color: red;
     text-decoration: underline;
 }
 
-/* Form Inputs */
-input, select, textarea {
-    padding: 6px;
-    margin-top: 5px;
+/* ---------- TABLE ---------- */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
 }
 
-/* CSS3 Pseudo-element */
-h2::first-letter {
-    font-size: 30px;
-    color: #0077ff;
+th {
+    background-color: #0055aa;
+    color: white;
 }
 
-/* Image Styling */
-.college-img {
-    width: 300px;
-    height: 200px;
-    border: 3px solid #004aad;
+td, th {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ---------- LISTS ---------- */
+ul li {
+    color: darkgreen;
+    font-weight: bold;
+}
+
+ol li {
+    color: brown;
+}
+
+/* ---------- FORMS ---------- */
+form {
+    width: 50%;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
     border-radius: 10px;
 }
 
-/* Footer */
-footer {
-    background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 10px;
+input, select, textarea {
+    padding: 6px;
+    margin: 5px 0;
 }
 
+input[type="submit"] {
+    background-color: green;
+    colo
