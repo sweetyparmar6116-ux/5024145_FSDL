@@ -3,82 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Third</title>
-
-   
+    <title>College Time Table</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="container mt-4">
-    <h2 class="text-center mb-4">College Time Table</h2>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="#">College</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Registration</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">Time Table</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-    <table class="table table-bordered table-striped text-center">
-        <thead class="table-dark">
-            <tr>
-                <th>Day</th>
-                <th>8:45–9:45</th>
-                <th>9:45–10:45</th>
-                <th>10:45–11:45</th>
-                <th>11:45–12:45</th>
-                <th>12:45–1:45</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Monday</td>
-                <td>Maths</td>
-                <td>FSDL</td>
-                <td>FSDL</td>
-                <td>Lunch Break</td>
-                <td>CN</td>
-            </tr>
-
-            <tr>
-                <td>Tuesday</td>
-                <td>EVS</td>
-                <td>Maths</td>
-                <td>SE</td>
-                <td>Lunch Break</td>
-                <td>MSE</td>
-            </tr>
-
-            <tr>
-                <td>Wednesday</td>
-                <td>NL</td>
-                <td>Maths</td>
-                <td>LL</td>
-                <td>Lunch Break</td>
-                <td>SE</td>
-            </tr>
-
-            <tr>
-                <td>Thursday</td>
-                <td>EVS</td>
-                <td>OS</td>
-                <td>EVS</td>
-                <td>Lunch Break</td>
-                <td>SEL</td>
-            </tr>
-
-            <tr>
-                <td>Friday</td>
-                <td>CN</td>
-                <td>Maths</td>
-                <td>EVS</td>
-                <td>Lunch Break</td>
-                <td>OSL</td>
-            </tr>
-        </tbody>
-    </table>
+<!-- Jumbotron -->
+<div class="bg-light p-5 rounded-3 my-4 text-center">
+    <h1 class="display-4">College Time Table</h1>
+    <p class="lead">Check your weekly schedule</p>
 </div>
 
+<!-- Time Table Table -->
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Day</th>
+                    <th>8:45–9:45</th>
+                    <th>9:45–10:45</th>
+                    <th>10:45–11:45</th>
+                    <th>11:45–12:45</th>
+                    <th>12:45–1:45</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td>Maths</td>
+                    <td>FSDL</td>
+                    <td>FSDL</td>
+                    <td>Lunch Break</td>
+                    <td>CN</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>EVS</td>
+                    <td>Maths</td>
+                    <td>SE</td>
+                    <td>Lunch Break</td>
+                    <td>MSE</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>NL</td>
+                    <td>Maths</td>
+                    <td>LL</td>
+                    <td>Lunch Break</td>
+                    <td>SE</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>EVS</td>
+                    <td>OS</td>
+                    <td>EVS</td>
+                    <td>Lunch Break</td>
+                    <td>SEL</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>CN</td>
+                    <td>Maths</td>
+                    <td>EVS</td>
+                    <td>Lunch Break</td>
+                    <td>OSL</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
-
-
-</body>
-
-
 </html>
