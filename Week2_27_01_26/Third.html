@@ -4,6 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Third</title>
+    <style>
+        /* Body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Heading styles */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Table styles */
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #eaf2f8;
+        }
+
+        /* Highlight lunch break */
+        td:contains("Lunch Break") {
+            background-color: #ffeb99;
+            font-weight: bold;
+        }
+
+        /* Zebra striping */
+        tr:nth-child(even) td {
+            background-color: #dff0d8;
+        }
+    </style>
     
 </head>
 <body>
