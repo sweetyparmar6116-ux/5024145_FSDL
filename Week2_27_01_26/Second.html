@@ -6,25 +6,95 @@
     <title>Document</title>
     <title>Internal CSS</title>
 
-    <style>
-    form {
-        background-color: #dff9fb;
-        padding: 15px;
-        border-radius: 8px;
-        width: 50%;
-        margin: auto;
-    }
+ <style>
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f3f5;
+            margin: 0;
+            padding: 20px;
+        }
 
-    input[type="submit"], input[type="reset"] {
-        background-color: #16a085;
-        color: white;
-    }
+        /* Page headings */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
 
-    h2 {
-        text-align: center;
-        color: #16a085;
-    }
-</style>
+        h2, h3 {
+            text-align: center;
+            color: #16a085;
+        }
+
+        /* Form container */
+        form {
+            background-color: #dff9fb;
+            padding: 25px;
+            border-radius: 12px;
+            width: 50%;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Input fields and textarea */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* Radio buttons styling */
+        .gender-group {
+            margin-bottom: 15px;
+        }
+
+        .gender-group label {
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #16a085;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #138d75;
+        }
+
+        /* Link styling */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #16a085;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h1> College </h1>
