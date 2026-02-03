@@ -1,4 +1,4 @@
-/* General Reset */
+ /* General Reset */
 body {
     margin: 0;
     padding: 0;
@@ -39,5 +39,93 @@ section {
 section h2 {
     color: #2c3e50;
     border-bottom: 2px solid #ddd;
-    padding-b;
+    padding-bottom: 5px;
+}
+
+/* Lists */
+.tech-list {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+ol {
+    margin-left: 20px;
+}
+
+/* Form */
+form {
+    max-width: 400px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    padding: 8px 15px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+}
+
+input[type="reset"] {
+    background-color: #95a5a6;
+    color: white;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #aaa;
+}
+
+th {
+    background-color: #ecf0f1;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+/* Media */
+.college-img {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #f1c40f;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
