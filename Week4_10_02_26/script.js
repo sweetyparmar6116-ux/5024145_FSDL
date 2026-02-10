@@ -109,6 +109,18 @@ exportBtn.addEventListener("click", () => {
 
   URL.revokeObjectURL(url);
 });
+const roleBtn = document.getElementById("roleBtn");
+let isAdmin = false;
+
+roleBtn.addEventListener("click", () => {
+  isAdmin = !isAdmin;
+  document.body.classList.toggle("admin-mode");
+
+  roleBtn.textContent = isAdmin
+    ? "Switch to User"
+    : "Switch to Admin";
+});
+
 
 
 
