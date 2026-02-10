@@ -213,6 +213,24 @@ footer {
 .dark footer {
   background: #111;
 }
+/* =======================
+   ROLE VISIBILITY
+======================= */
+.admin-only {
+  display: none;
+}
+
+.user-only {
+  display: block;
+}
+
+.admin-mode .admin-only {
+  display: block;
+}
+
+.admin-mode .user-only {
+  display: none;
+}
 
 
 
