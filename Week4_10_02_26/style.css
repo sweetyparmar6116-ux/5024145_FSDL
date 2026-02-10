@@ -11,31 +11,31 @@
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.25), transparent 45%),
-    radial-gradient(circle at 80% 30%, rgba(139, 92, 246, 0.25), transparent 45%),
-    linear-gradient(135deg, #020617, #020617, #020617, #020617);
+    radial-gradient(circle at 20% 20%, rgba(255, 223, 186, 0.6), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(255, 240, 200, 0.6), transparent 45%),
+    linear-gradient(135deg, #fff7e6, #fff1cc, #ffe8b3);
   background-size: 200% 200%;
-  animation: midnightFlow 20s ease infinite;
-  color: #e5e7eb;
+  animation: sunshineFlow 18s ease infinite;
+  color: #3a2e1f;
 }
 
-/* Midnight slow movement */
-@keyframes midnightFlow {
+/* Soft sunshine movement */
+@keyframes sunshineFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Subtle stars */
+/* Light sparkle dust */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 60% 40%, rgba(255,255,255,0.25), transparent),
-    radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,0.3), transparent);
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 35% 65%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 55% 40%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 75% 70%, rgba(255,255,255,0.5), transparent);
   background-size: 300px 300px;
   pointer-events: none;
 }
@@ -46,47 +46,48 @@ body::before {
 header {
   text-align: center;
   padding: 2.5rem 1rem;
-  background: linear-gradient(135deg, #020617, #020617);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(135deg, #ffdd99, #ffd36a);
+  box-shadow: 0 10px 25px rgba(255, 193, 7, 0.35);
 }
 
 header h1 {
   font-size: 2.2rem;
-  color: #e0e7ff;
+  color: #5c3b00;
 }
 
 header p {
   margin-top: 0.5rem;
-  color: #c7d2fe;
+  color: #6b4a10;
 }
 
 #roleBtn {
   margin-top: 1.2rem;
   padding: 10px 18px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(99, 102, 241, 0.15);
-  color: #e0e7ff;
+  border-radius: 10px;
+  border: none;
+  background: white;
+  color: #b45309;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
 
 #roleBtn:hover {
-  background: rgba(99, 102, 241, 0.3);
+  background: #fff3cd;
 }
 
 /* =====================================
-   SECTIONS (GLASS MIDNIGHT)
+   SECTIONS (SUN GLASS)
 ===================================== */
 .form-section,
 .list-section {
   max-width: 520px;
   margin: 2.5rem auto;
   padding: 2rem;
-  border-radius: 18px;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 45px rgba(255, 193, 7, 0.25);
   animation: fadeUp 0.6s ease;
 }
 
@@ -104,7 +105,7 @@ header p {
 h2 {
   text-align: center;
   margin-bottom: 1.2rem;
-  color: #e0e7ff;
+  color: #92400e;
 }
 
 /* =====================================
@@ -116,22 +117,22 @@ form select {
   padding: 14px;
   margin-bottom: 1rem;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(30, 41, 59, 0.8);
-  color: #f8fafc;
+  border: 1px solid #fcd34d;
+  background: #fffaf0;
+  color: #3a2e1f;
   font-size: 15px;
   transition: 0.3s;
 }
 
 form input::placeholder {
-  color: #94a3b8;
+  color: #9a7b4f;
 }
 
 form input:focus,
 form select:focus {
   outline: none;
-  border-color: #818cf8;
-  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
 }
 
 /* =====================================
@@ -140,19 +141,19 @@ form select:focus {
 button {
   width: 100%;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: none;
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
-  color: white;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #5c3b00;
+  background: linear-gradient(135deg, #fde68a, #fbbf24);
   transition: all 0.3s ease;
 }
 
 button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(99,102,241,0.45);
+  box-shadow: 0 12px 30px rgba(245,158,11,0.45);
 }
 
 button:active {
@@ -177,20 +178,19 @@ button:active {
   padding: 12px;
   margin-bottom: 1rem;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(30, 41, 59, 0.85);
-  color: white;
+  border: 1px solid #fcd34d;
+  background: #fffaf0;
 }
 
 /* =====================================
    PARTICIPANT CARD
 ===================================== */
 .participant-card {
-  background: rgba(30, 41, 59, 0.9);
+  background: rgba(255, 248, 235, 0.95);
   padding: 1.2rem;
-  border-radius: 16px;
+  border-radius: 18px;
   margin-bottom: 1rem;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 15px 30px rgba(245,158,11,0.3);
   transition: 0.3s;
 }
 
@@ -199,7 +199,7 @@ button:active {
 }
 
 .participant-card h3 {
-  color: #e0e7ff;
+  color: #92400e;
   margin-bottom: 6px;
 }
 
@@ -208,7 +208,8 @@ button:active {
 ===================================== */
 .delete-btn {
   margin-top: 8px;
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: white;
 }
 
 .delete-btn:hover {
@@ -222,7 +223,7 @@ button:active {
   text-align: center;
   margin-bottom: 1rem;
   font-weight: bold;
-  color: #c7d2fe;
+  color: #92400e;
 }
 
 /* =====================================
@@ -231,8 +232,8 @@ button:active {
 footer {
   text-align: center;
   padding: 1rem;
-  background: rgba(2,6,23,0.9);
-  color: #94a3b8;
+  background: rgba(255, 243, 205, 0.9);
+  color: #7c5c2e;
 }
 
 /* =====================================
