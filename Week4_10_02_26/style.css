@@ -66,5 +66,27 @@ footer {
   padding: 1rem;
   background: #eee;
 }
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.delete-btn {
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}
+
 
 
