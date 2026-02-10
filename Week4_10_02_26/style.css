@@ -87,6 +87,47 @@ footer {
 .delete-btn:hover {
   background: darkred;
 }
+.btn-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.btn-group button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #0072ff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-group button:hover {
+  opacity: 0.85;
+}
+
+#infoText {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Dark mode */
+.dark {
+  background: #121212;
+  color: #f4f4f4;
+}
+
+.dark .form-section,
+.dark .list-section {
+  background: #1e1e1e;
+}
+
+.dark .participant-card {
+  background: #2a2a2a;
+}
 
 
 
