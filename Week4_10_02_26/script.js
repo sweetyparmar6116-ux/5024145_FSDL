@@ -62,6 +62,54 @@ searchInput.addEventListener("input", ({ target }) => {
 
 // Initial render
 renderParticipants();
+const darkBtn = document.getElementById("darkBtn");
+const countBtn = document.getElementById("countBtn");
+const sortBtn = document.getElementById("sortBtn");
+const clearBtn = document.getElementById("clearBtn");
+const exportBtn = document.getElementById("exportBtn");
+const infoText = document.getElementById("infoText");
+
+// 🌙 Dark Mode Button
+darkBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
+
+// 📊 Show Count Button
+countBtn.addEventListener("click", () => {
+  infoText.textContent = `Total Registrations: ${participants.length}`;
+});
+
+// 🔄 Sort by Name Button
+sortBtn.addEventListener("click", () => {
+  participants.sort((a, b) => a.name.localeCompare(b.name));
+  localStorage.setItem("participants", JSON.stringify(participants));
+  renderParticipants();
+});
+
+// 🧹 Clear All Button
+clearBtn.addEventListener("click", () => {
+  if (confirm("Are you sure you want to delete all registrations?")) {
+    participants = [];
+    localStorage.removeItem("participants");
+    renderParticipants();
+    infoText.textContent = "All registrations cleared!";
+  }
+});
+
+// 📥 Export Data Button
+exportBtn.addEventListener("click", () => {
+  const dataStr = JSON.stringify(participants, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "event_registrations.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
+
 
 
 
