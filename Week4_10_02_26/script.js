@@ -1,60 +1,36 @@
-// VARIABLES (ES6)
-const form = document.getElementById("collegeForm");
-const message = document.getElementById("message");
+const form = document.getElementById("registrationForm");
+const participantList = document.getElementById("participantList");
 
-// CLASS
-class Student {
-    constructor(name, email, age, course) {
-        this.name = name;
-        this.email = email;
-        this.age = age;
-        this.course = course;
-    }
+// ES6: Arrow function + destructuring
+const createParticipantCard = ({ name, email, age, event }) => `
+  <div class="participant-card">
+    <h3>${name}</h3>
+    <p>Email: ${email}</p>
+    <p>Age: ${age}</p>
+    <p>Event: ${event}</p>
+  </div>
+`;
 
-    getInfo() {
-        return `Registration successful! Welcome ${this.name}.`;
-    }
-}
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-// EVENT + ARROW FUNCTION
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+  // ES6: const & destructuring
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const age = document.getElementById("age").value;
+  const event = document.getElementById("event").value;
 
-    // VARIABLES
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const age = document.getElementById("age").value;
-    const course = document.getElementById("course").value;
+  if (!event) {
+    alert("Please select an event");
+    return;
+  }
 
-    // CONDITIONS
-    if (!name || !email || !age || !course) {
-        showMessage("Please fill all fields", "red");
-        return;
-    }
+  const participant = { name, email, age, event };
 
-    if (age < 17) {
-        showMessage("Age must be 17 or above", "red");
-        return;
-    }
+  // ES6: Template literals + innerHTML
+  participantList.innerHTML += createParticipantCard(participant);
 
-    // OBJECT CREATION
-    const student = new Student(name, email, age, course);
-
-    showMessage(student.getInfo(), "green");
-    clearForm();
+  form.reset();
 });
 
-// FUNCTION
-const showMessage = (text, color) => {
-    message.style.color = color;
-    message.innerText = text;
-};
-
-// LOOP
-const clearForm = () => {
-    const fields = document.querySelectorAll("input, select");
-    for (let i = 0; i < fields.length; i++) {
-        fields[i].value = "";
-    }
-};
 
