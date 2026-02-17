@@ -1,93 +1,89 @@
-
-
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #f6e9ff, #fff6d6);
+    background: linear-gradient(135deg, #f6e9ff, #fff1d6);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-
 .container {
-    background: #ffffff;
-    padding: 32px;
+    background: white;
+    padding: 36px;
     width: 360px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(150, 90, 200, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(155, 90, 200, 0.25);
     text-align: center;
-    animation: float 4s ease-in-out infinite;
 }
 
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0px); }
-}
-
-
+/* Title */
 h2 {
-    margin-bottom: 22px;
-    color: #6a1fbf; /* royal purple */
+    color: #6a1fbf;
+    margin-bottom: 26px;
     font-weight: 700;
-    letter-spacing: 0.5px;
 }
 
-
-   
+/* Form */
 form {
     text-align: left;
 }
 
-
+/* Labels */
 label {
     font-size: 14px;
     font-weight: 600;
     color: #5a2a82;
 }
 
-
-input {
+/* Inputs */
+input[type="text"],
+input[type="password"] {
     width: 100%;
-    padding: 10px;
-    margin: 6px 0 16px 0;
-    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0 18px;
+    border-radius: 10px;
     border: 1px solid #d8b9ff;
-    background-color: #faf6ff;
+    background: #faf6ff;
     outline: none;
-    transition: border 0.3s, box-shadow 0.3s;
+    transition: box-shadow 0.3s, border 0.3s;
 }
 
 input:focus {
-    border-color: #f2b705; /* golden glow */
-    box-shadow: 0 0 6px rgba(242, 183, 5, 0.6);
+    border-color: #c89bff;
+    box-shadow: 0 0 8px rgba(200, 155, 255, 0.6);
 }
 
+/* Show password */
+.show-password {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #6a1fbf;
+    margin-bottom: 20px;
+}
 
+/* Button */
 button {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     background: linear-gradient(135deg, #f2b705, #ffd966);
     color: #5a3b00;
     border: none;
-    border-radius: 10px;
+    border-radius: 14px;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 15px;
     cursor: pointer;
-    box-shadow: 0 6px 15px rgba(242, 183, 5, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 20px rgba(242, 183, 5, 0.45);
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(242, 183, 5, 0.6);
+    transform: translateY(-1px);
 }
 
-
+/* Link */
 .link-text {
-    margin-top: 16px;
+    margin-top: 20px;
     font-size: 14px;
     color: #6a1fbf;
 }
@@ -101,12 +97,4 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
-
-#msg, #loginMsg {
-    margin-top: 12px;
-    font-weight: bold;
-    color: #6a1fbf;
-}
-
 
