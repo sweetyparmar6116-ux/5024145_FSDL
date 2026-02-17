@@ -131,6 +131,12 @@ function togglePassword() {
     let pwd = document.getElementById("password");
     pwd.type = pwd.type === "password" ? "text" : "password";
 }
+document.getElementById("loginMsg").innerHTML =
+    "Login Successful! Redirecting...";
+
+setTimeout(() => {
+    window.location.href = "dashboard.html";
+}, 1500);
 
 // Expose for console usage during development
 window.auth = { users, registerUser, loginUser, listUsernames, showAllUsers };
