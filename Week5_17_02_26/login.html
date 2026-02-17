@@ -3,19 +3,30 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
-<h2>Login Page</h2>
+<div class="container">
+    <h2>Login Page</h2>
 
-<form onsubmit="loginUser(event)">
-    Username: <input type="text" id="loginUsername"><br><br>
-    Password: <input type="password" id="loginPassword"><br><br>
-    <button type="submit">Login</button>
-</form>
+    <form onsubmit="loginUser(event)">
+        <label>Username</label>
+        <input type="text" id="loginUsername">
 
-<p id="loginMsg"></p>
+        <label>Password</label>
+        <input type="password" id="loginPassword">
+
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Optional register link -->
+    <p class="link-text">
+        New user?
+        <a href="register.html">Register here</a>
+    </p>
+
+    <p id="loginMsg"></p>
+</div>
 
 <script src="auth.js"></script>
 </body>
