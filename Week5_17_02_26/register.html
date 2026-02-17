@@ -3,26 +3,33 @@
 <head>
     <title>Register</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
-<h2>Registration Page</h2>
+<div class="container">
+    <h2>Registration Page</h2>
 
-<form onsubmit="registerUser(event)">
-    Username: <input type="text" id="username"><br><br>
-    Email: <input type="text" id="email"><br><br>
-    Password: <input type="password" id="password"><br><br>
-    <button type="submit">Register</button>
-</form>
+    <form onsubmit="registerUser(event)">
+        <label>Username</label>
+        <input type="text" id="username">
 
-<!-- LINK TO LOGIN PAGE -->
-<p>
-    Already have an account?
-    <a href="login.html">Login here</a>
-</p>
+        <label>Email</label>
+        <input type="text" id="email">
 
-<p id="msg"></p>
+        <label>Password</label>
+        <input type="password" id="password">
+
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Login link properly placed -->
+    <p class="link-text">
+        Already have an account?
+        <a href="login.html">Login here</a>
+    </p>
+
+    <p id="msg"></p>
+</div>
 
 <script src="auth.js"></script>
 </body>
