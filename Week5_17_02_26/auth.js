@@ -137,6 +137,27 @@ document.getElementById("loginMsg").innerHTML =
 setTimeout(() => {
     window.location.href = "dashboard.html";
 }, 1500);
+document.getElementById("loginForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // 🔴 VERY IMPORTANT
+
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const error = document.getElementById("error");
+
+  if (username === "" || password === "") {
+    error.textContent = "Please enter username and password";
+    error.style.color = "red";
+    return;
+  }
+
+  // Dummy login check
+  if (username === "admin" && password === "1234") {
+    window.location.href = "home.html"; // redirect only if correct
+  } else {
+    error.textContent = "Invalid login credentials";
+    error.style.color = "red";
+  }
+});
 
 // Expose for console usage during development
 window.auth = { users, registerUser, loginUser, listUsernames, showAllUsers };
