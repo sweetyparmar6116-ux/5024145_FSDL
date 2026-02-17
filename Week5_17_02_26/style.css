@@ -1,0 +1,85 @@
+/* ================================
+   BASIC PAGE STYLING
+   ================================ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f6ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ================================
+   FORM CONTAINER
+   ================================ */
+form {
+    background-color: white;
+    padding: 25px 30px;
+    width: 320px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   HEADINGS
+   ================================ */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* ================================
+   INPUT FIELDS
+   ================================ */
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* ================================
+   BUTTON
+   ================================ */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4f6df5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3c56d8;
+}
+
+/* ================================
+   LINKS
+   ================================ */
+p {
+    text-align: center;
+    font-size: 14px;
+}
+
+a {
+    color: #4f6df5;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   MESSAGE TEXT
+   ================================ */
+#msg, #loginMsg {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
