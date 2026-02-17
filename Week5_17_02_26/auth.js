@@ -2,7 +2,13 @@
 // ARRAY IMPLEMENTATION
 // Used to store registered users
 // ================================
+// Load users from localStorage so registrations persist across pages
 let users = [];
+try {
+    users = JSON.parse(localStorage.getItem('users') || '[]');
+} catch (e) {
+    users = [];
+}
 
 // ================================
 // REGISTRATION FUNCTION
@@ -10,59 +16,45 @@ let users = [];
 function registerUser(event) {
     event.preventDefault();
 
-    // ================================
-    // ERROR HANDLING USING try-catch
-    // ================================
     try {
-        // Fetch input values
         let username = document.getElementById("username").value.trim();
         let email = document.getElementById("email").value.trim();
         let password = document.getElementById("password").value;
 
-        // ================================
-        // VALIDATIONS
-        // ================================
-        if (username === "" || email === "" || password === "") {
-            throw "All fields are required!";
-        }
+        // Validations
+        if (!username || !email || !password) throw new Error('All fields are required!');
+        if (!validateEmail(email)) throw new Error('Invalid email format!');
+        let pwdCheck = checkPasswordStrength(password);
+        if (!pwdCheck.valid) throw new Error(pwdCheck.message);
 
-        if (!email.includes("@")) {   // String validation
-            throw "Invalid email format!";
-        }
-
-        if (password.length < 6) {
-            throw "Password must be at least 6 characters!";
-        }
-
-        // ================================
-        // STRING METHODS
-        // ================================
+        // Normalize strings
         username = username.toLowerCase();
         email = email.toLowerCase();
 
-        // ================================
-        // DATE OBJECT
-        // ================================
-        let registrationDate = new Date().toLocaleString();
+        // Prevent duplicate usernames/emails
+        if (users.some(u => u.username === username)) throw new Error('Username already taken');
+        if (users.some(u => u.email === email)) throw new Error('Email already registered');
 
-        // ================================
-        // ARRAY USAGE (push)
-        // ================================
-        let user = {
-            username: username,
-            email: email,
-            password: password,
-            registeredOn: registrationDate
+        // Date
+        const registeredOn = new Date().toISOString();
+
+        const user = {
+            id: Date.now(),
+            username,
+            email,
+            password,
+            registeredOn,
+            lastLogin: null
         };
 
         users.push(user);
+        saveUsers();
 
         document.getElementById("msg").innerHTML =
-            "Registration Successful!<br>Registered on: " + registrationDate;
+            `Registration Successful!<br>Registered on: ${formatDate(registeredOn)}`;
 
-    } catch (error) {
-        document.getElementById("msg").innerHTML =
-            "Error: " + error;
+    } catch (err) {
+        document.getElementById("msg").innerHTML = `Error: ${err.message || err}`;
     }
 }
 
@@ -72,36 +64,68 @@ function registerUser(event) {
 function loginUser(event) {
     event.preventDefault();
 
-    // ================================
-    // ERROR HANDLING
-    // ================================
     try {
-        let username = document.getElementById("loginUsername").value.trim().toLowerCase();
-        let password = document.getElementById("loginPassword").value;
+        const username = document.getElementById("loginUsername").value.trim().toLowerCase();
+        const password = document.getElementById("loginPassword").value;
 
-        // ================================
-        // VALIDATIONS
-        // ================================
-        if (username === "" || password === "") {
-            throw "All fields are required!";
-        }
+        if (!username || !password) throw new Error('All fields are required!');
 
-        // ================================
-        // ARRAY METHOD (find)
-        // ================================
-        let foundUser = users.find(user =>
-            user.username === username && user.password === password
-        );
+        const found = users.find(u => u.username === username && u.password === password);
+        if (!found) throw new Error('Invalid username or password!');
 
-        if (!foundUser) {
-            throw "Invalid username or password!";
-        }
+        found.lastLogin = new Date().toISOString();
+        saveUsers();
 
-        document.getElementById("loginMsg").innerHTML =
-            "Login Successful! Welcome " + foundUser.username;
+        document.getElementById("loginMsg").innerHTML = `Login Successful! Welcome ${found.username}`;
 
-    } catch (error) {
-        document.getElementById("loginMsg").innerHTML =
-            "Error: " + error;
+    } catch (err) {
+        document.getElementById("loginMsg").innerHTML = `Error: ${err.message || err}`;
     }
 }
+
+// ------------------------
+// Utility functions
+// ------------------------
+function saveUsers() {
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+function validateEmail(email) {
+    // basic RFC-like regex for demonstration
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function checkPasswordStrength(pw) {
+    if (pw.length < 6) return { valid: false, message: 'Password must be at least 6 characters' };
+    if (!/[0-9]/.test(pw)) return { valid: false, message: 'Password must include a number' };
+    if (!/[A-Z]/.test(pw)) return { valid: false, message: 'Password should include an uppercase letter' };
+    return { valid: true };
+}
+
+function formatDate(isoString) {
+    const d = new Date(isoString);
+    return d.toLocaleString();
+}
+
+// Demonstrate array/string methods: returns a comma-separated list of usernames
+function listUsernames() {
+    return users.map(u => u.username).join(', ');
+}
+
+// Show detailed users in the `msg` element (for debugging / demo)
+function showAllUsers() {
+    const el = document.getElementById('msg');
+    if (!el) return;
+    if (users.length === 0) {
+        el.innerHTML = 'No registered users.';
+        return;
+    }
+    const items = users.map(u => {
+        return `${u.username} (${u.email}) - Registered: ${formatDate(u.registeredOn)} - LastLogin: ${u.lastLogin ? formatDate(u.lastLogin) : 'never'}`;
+    });
+    el.innerHTML = items.join('<br>');
+}
+
+// Expose for console usage during development
+window.auth = { users, registerUser, loginUser, listUsernames, showAllUsers };
