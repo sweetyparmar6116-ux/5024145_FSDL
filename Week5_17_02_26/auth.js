@@ -128,36 +128,40 @@ function showAllUsers() {
 }
 // Show / Hide Password Feature
 function togglePassword() {
-    let pwd = document.getElementById("password");
+    const pwd = document.getElementById("loginPassword");
     pwd.type = pwd.type === "password" ? "text" : "password";
 }
-document.getElementById("loginMsg").innerHTML =
-    "Login Successful! Redirecting...";
 
-setTimeout(() => {
-    window.location.href = "dashboard.html";
-}, 1500);
-document.getElementById("loginForm").addEventListener("submit", function (event) {
-  event.preventDefault(); // 🔴 VERY IMPORTANT
 
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const error = document.getElementById("error");
+function loginUser(event) {
+    event.preventDefault();
 
-  if (username === "" || password === "") {
-    error.textContent = "Please enter username and password";
-    error.style.color = "red";
-    return;
-  }
+    try {
+        const username = document.getElementById("loginUsername").value.trim().toLowerCase();
+        const password = document.getElementById("loginPassword").value;
 
-  // Dummy login check
-  if (username === "admin" && password === "1234") {
-    window.location.href = "home.html"; // redirect only if correct
-  } else {
-    error.textContent = "Invalid login credentials";
-    error.style.color = "red";
-  }
-});
+        if (!username || !password) throw new Error('All fields are required!');
+
+        const found = users.find(u => u.username === username && u.password === password);
+        if (!found) throw new Error('Invalid username or password!');
+
+        found.lastLogin = new Date().toISOString();
+        saveUsers();
+
+        document.getElementById("loginMsg").style.color = "green";
+        document.getElementById("loginMsg").innerHTML =
+            `Login Successful! Welcome ${found.username}`;
+
+        // OPTIONAL redirect
+        // window.location.href = "welcome.html";
+
+    } catch (err) {
+        document.getElementById("loginMsg").style.color = "red";
+        document.getElementById("loginMsg").innerHTML =
+            `Error: ${err.message || err}`;
+    }
+}
+
 
 // Expose for console usage during development
 window.auth = { users, registerUser, loginUser, listUsernames, showAllUsers };
