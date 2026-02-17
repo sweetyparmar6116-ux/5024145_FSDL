@@ -126,6 +126,11 @@ function showAllUsers() {
     });
     el.innerHTML = items.join('<br>');
 }
+// Show / Hide Password Feature
+function togglePassword() {
+    let pwd = document.getElementById("password");
+    pwd.type = pwd.type === "password" ? "text" : "password";
+}
 
 // Expose for console usage during development
 window.auth = { users, registerUser, loginUser, listUsernames, showAllUsers };
