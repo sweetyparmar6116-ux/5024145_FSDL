@@ -1,63 +1,72 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState([])
+  const [input, setInput] = useState('')
+
+  const addTodo = () => {
+    if (input.trim()) {
+      setTodos([...todos, { id: Date.now(), text: input, completed: false }])
+      setInput('')
+    }
+  }
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ))
+  }
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="container">
+      <div className="todo-app">
+        <h1>📝 My Todo List</h1>
+        
+        <div className="input-container">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+            placeholder="Add a new task..."
+            className="todo-input"
+          />
+          <button onClick={addTodo} className="add-btn">Add</button>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <div className="todos-list">
+          {todos.length === 0 ? (
+            <p className="empty-message">No todos yet. Add one to get started! 🚀</p>
+          ) : (
+            todos.map(todo => (
+              <div key={todo.id} className="todo-item">
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                  className="todo-checkbox"
+                />
+                <span className={todo.completed ? 'todo-text completed' : 'todo-text'}>
+                  {todo.text}
+                </span>
+                <button onClick={() => deleteTodo(todo.id)} className="delete-btn">
+                  ✕
+                </button>
+              </div>
+            ))
+          )}
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
+
+        <div className="stats">
+          <p>Total: {todos.length} | Completed: {todos.filter(t => t.completed).length}</p>
+        </div>
+      </div>
+    </div>
           <p>Join the Vite community</p>
           <ul>
             <li>
