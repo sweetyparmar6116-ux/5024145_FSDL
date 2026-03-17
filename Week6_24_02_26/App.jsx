@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [text, setText] = useState("");
-
-  useEffect(() => {
+  const [tasks, setTasks] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("tasks"));
-    if (saved) setTasks(saved);
-  }, []);
+    return saved || [];
+  });
+  const [text, setText] = useState("");
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
