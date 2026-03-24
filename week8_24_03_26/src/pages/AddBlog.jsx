@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function AddBlog() {
+function AddBlog({ setBlogs }) {
   const titleRef = useRef();
   const contentRef = useRef();
 
@@ -13,7 +13,13 @@ function AddBlog() {
       return;
     }
 
-    alert("Blog Added!");
+    const newBlog = {
+      id: Date.now(),
+      title,
+      content
+    };
+
+    setBlogs(prev => [...prev, newBlog]);
 
     titleRef.current.value = "";
     contentRef.current.value = "";
