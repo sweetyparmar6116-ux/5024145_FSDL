@@ -16,10 +16,15 @@ function StrengthBar({ hasLength, hasNumber, hasSymbol }) {
         width = "100%";
     }
 
+    const barStyle = {
+        background: "linear-gradient(to right, red, orange, limegreen)",
+        width: width
+    };
+
     return (
         <>
             <h3 style={{color: color}}>Strength: {strength}</h3>
-            <div className="strength-bar" style={{background: color, width: width}}></div>
+            <div className="strength-bar" style={barStyle}></div>
         </>
     );
 }
