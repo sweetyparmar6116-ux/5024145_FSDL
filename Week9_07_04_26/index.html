@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Hello World</title>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- Routing -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+
+    <!-- Files -->
+    <script src="app.js"></script>
+    <script src="routes.js"></script>
+    <script src="controller.js"></script>
+</head>
+<body>
+
+    <h1>AngularJS Hello World App</h1>
+
+    <!-- Navigation -->
+    <a href="#!/">Home</a> |
+    <a href="#!/about">About</a>
+
+    <hr>
+
+    <!-- View -->
+    <div ng-view></div>
+
+</body>
+</html>
