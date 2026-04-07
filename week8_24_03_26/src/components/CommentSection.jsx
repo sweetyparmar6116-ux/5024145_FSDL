@@ -15,7 +15,7 @@ function CommentSection() {
   };
 
   return (
-    <div>
+    <div className="comment-section">
       <h3>Comments</h3>
 
       <input ref={inputRef} placeholder="Add comment" />
@@ -29,5 +29,7 @@ function CommentSection() {
     </div>
   );
 }
+
+export default CommentSection;
 
 export default CommentSection;
