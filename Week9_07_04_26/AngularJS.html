@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Hello World</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+    <div ng-controller="myController">
+
+        <h2>Hello World using AngularJS</h2>
+
+        <!-- Input using ng-model -->
+        <label>Enter your name: </label>
+        <input type="text" ng-model="name" placeholder="Type your name here">
+
+        <br><br>
+
+        <!-- Expression -->
+        <h3>Hello {{name}} 👋</h3>
+
+    </div>
+
+    <script>
+        // Create AngularJS App
+        var app = angular.module("myApp", []);
+
+        // Create Controller
+        app.controller("myController", function($scope) {
+            $scope.name = "World"; // Default value
+        });
+    </script>
+
+</body>
+</html>
