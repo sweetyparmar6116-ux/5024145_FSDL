@@ -2,7 +2,11 @@
 <html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AngularJS Hello World</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -17,16 +21,23 @@
 </head>
 <body>
 
-    <h1>AngularJS Hello World App</h1>
+    <div class="container">
+        <header>
+            <h1>AngularJS Hello World App</h1>
+            <p>A simple project using ng-controller, ng-model, and expressions</p>
+        </header>
 
-    <!-- Navigation -->
-    <a href="#!/">Home</a> |
-    <a href="#!/about">About</a>
+        <!-- Navigation -->
+        <nav>
+            <a href="#!/">Home</a>
+            <a href="#!/about">About</a>
+        </nav>
 
-    <hr>
-
-    <!-- View -->
-    <div ng-view></div>
+        <!-- View -->
+        <main>
+            <div ng-view></div>
+        </main>
+    </div>
 
 </body>
 </html>
