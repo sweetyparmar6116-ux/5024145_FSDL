@@ -1,23 +1,29 @@
-<div>
+<div ng-controller="myController">
 
-    <h2>Hello World Example</h2>
+    <h2>{{ appTitle }}</h2>
+    <p>{{ appSubtitle }}</p>
 
     <label>Enter your name:</label>
-    <input type="text" ng-model="name">
+    <input type="text" ng-model="name" placeholder="Type your name here">
 
     <br><br>
 
-    <h3>Hello {{name}} 👋</h3>
-
-    <p>Uppercase: {{name | uppercase}}</p>
+    <h3>Hello {{ name || 'Guest' }} 👋</h3>
+    <p>Uppercase: {{ name | uppercase }}</p>
+    <p>Name length: {{ name.length || 0 }}</p>
+    <p>The name is {{ (name.length || 0) > 5 ? 'long' : 'short' }}.</p>
 
     <button ng-click="changeMessage()">Change to AngularJS</button>
+    <button ng-click="increment()">Clicked {{ counter }} times</button>
 
     <hr>
 
-    <h4>Messages:</h4>
+    <h4>Messages</h4>
     <ul>
-        <li ng-repeat="msg in items">{{msg}}</li>
+        <li ng-repeat="msg in items">{{ msg }}</li>
     </ul>
+
+    <input type="text" ng-model="newItem" placeholder="Add a new message">
+    <button ng-click="addItem()">Add message</button>
 
 </div>
