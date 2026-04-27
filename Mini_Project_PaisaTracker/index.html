@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>PaisaTrack - Indian Expense Tracker</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#410003",
+            "surface-container-highest": "#d4e5ef",
+            "on-primary-fixed": "#001945",
+            "inverse-primary": "#b0c6ff",
+            "primary-container": "#0d47a1",
+            "on-background": "#0d1e25",
+            "background": "#f4faff",
+            "inverse-surface": "#23333a",
+            "tertiary": "#720009",
+            "outline-variant": "#c3c6d4",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#434652",
+            "surface-bright": "#f4faff",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#ffdad6",
+            "outline": "#737783",
+            "on-primary-container": "#a1bbff",
+            "on-surface": "#0d1e25",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#307231",
+            "on-primary": "#ffffff",
+            "primary": "#003178",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#dff1fb",
+            "secondary-container": "#acf4a4",
+            "tertiary-fixed-dim": "#ffb4ac",
+            "inverse-on-surface": "#e2f3fd",
+            "surface-variant": "#d4e5ef",
+            "on-primary-fixed-variant": "#00429c",
+            "on-secondary-fixed": "#002203",
+            "on-secondary": "#ffffff",
+            "secondary": "#2a6b2c",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#9d0010",
+            "surface": "#f4faff",
+            "primary-fixed-dim": "#b0c6ff",
+            "on-secondary-fixed-variant": "#0c5216",
+            "surface-container-high": "#d9ebf5",
+            "surface-tint": "#2b5bb5",
+            "primary-fixed": "#d9e2ff",
+            "surface-container-low": "#e7f6ff",
+            "on-tertiary-container": "#ffa59c",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#91d78a",
+            "surface-dim": "#cbdde7",
+            "secondary-fixed": "#acf4a4",
+            "on-tertiary-fixed-variant": "#93000e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body { font-family: 'Inter', sans-serif; min-height: max(884px, 100dvh); }
+    h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+
+    /* Views */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* Auth Container */
+    #auth-screen { display: none; }
+    #auth-screen.active { display: flex; }
+
+    /* App Container */
+    #app-shell { display: none; }
+    #app-shell.active { display: flex; }
+
+    /* Modal */
+    #expense-modal.hidden { display: none; }
+    #expense-modal {
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Nav active state */
+    .nav-link { transition: all 0.2s; }
+    .nav-link.active {
+      background: linear-gradient(to bottom right, #1e40af, #2563eb);
+      color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+    .nav-link:not(.active) { color: #475569; }
+    .nav-link:not(.active):hover {
+      background: #eff6ff;
+      color: #1e40af;
+      border-radius: 0.5rem;
+    }
+
+    /* Mobile nav active */
+    .mob-nav-item.active { color: #003178; }
+    .mob-nav-item:not(.active) { color: #94a3b8; }
+
+    /* Auth tab active */
+    .auth-tab.active {
+      border-bottom: 2px solid #003178;
+      color: #003178;
+      font-weight: 700;
+    }
+    .auth-tab:not(.active) { color: #94a3b8; border-bottom: 2px solid transparent; }
+
+    /* Bar chart */
+    .bar-wrap {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      height: 100%; position: relative; cursor: pointer;
+    }
+    .bar-wrap .bar-bar {
+      width: 100%; border-radius: 6px 6px 0 0;
+      transition: filter 0.15s, transform 0.15s; transform-origin: bottom;
+    }
+    .bar-wrap:hover .bar-bar { filter: brightness(1.15); transform: scaleY(1.03); }
+    .bar-tooltip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: #1e293b; color: #fff;
+      border-radius: 8px; padding: 6px 10px; font-size: 11px;
+      white-space: nowrap; pointer-events: none; opacity: 0;
+      transition: opacity 0.15s; z-index: 20; box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .bar-tooltip::after {
+      content: ''; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); border: 5px solid transparent;
+      border-top-color: #1e293b;
+    }
+    .bar-tooltip .tip-day  { font-weight: 600; margin-bottom: 2px; }
+    .bar-tooltip .tip-amt  { color: #60a5fa; font-weight: 700; font-size: 13px; }
+    .bar-tooltip .tip-none { color: #94a3b8; }
+    .bar-wrap:hover .bar-tooltip { opacity: 1; }
+
+    /* Loading spinner */
+    .spinner {
+      width: 40px; height: 40px;
+      border: 4px solid #dff1fb; border-top-color: #003178;
+      border-radius: 50%; animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Auth background blob */
+    .auth-blob {
+      position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; opacity: 0.35;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+
+  <!-- ======= AUTH SCREEN ======= -->
+  <div id="auth-screen" class="min-h-screen w-full items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-900">
+    <!-- Background blobs -->
+    <div class="auth-blob bg-blue-400 w-96 h-96 -top-20 -left-20"></div>
+    <div class="auth-blob bg-indigo-500 w-64 h-64 bottom-10 right-10"></div>
+    <div class="auth-blob bg-sky-400 w-48 h-48 top-1/2 left-1/2"></div>
+
+    <div class="relative z-10 w-full max-w-sm mx-auto px-4">
+      <!-- Branding -->
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+          <span class="material-symbols-outlined text-white text-3xl">account_balance</span>
+        </div>
+        <h1 class="font-headline text-white text-3xl font-extrabold tracking-tight">PaisaTrack</h1>
+        <p class="text-blue-200 text-sm mt-1">Apka personal finance companion</p>
+      </div>
+
+      <!-- Card -->
+      <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-2xl">
+        <!-- Tabs -->
+        <div class="flex mb-6 border-b border-white/20">
+          <button id="tab-login" class="auth-tab active flex-1 py-2 text-sm transition-all">Sign In</button>
+          <button id="tab-register" class="auth-tab flex-1 py-2 text-sm transition-all">Create Account</button>
+        </div>
+
+        <!-- Error message -->
+        <div id="auth-error" class="hidden mb-4 bg-red-500/20 border border-red-400/30 text-red-200 text-sm rounded-xl px-4 py-3"></div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="block text-blue-100 text-xs font-medium mb-1.5">Email</label>
+            <input id="login-email" type="email" required placeholder="you@example.com"
+              class="w-full bg-white/10 border border-white/20 text-white placeholder-blue-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"/>
+          </div>
+          <div>
+            <label class="block text-blue-100 text-xs font-medium mb-1.5">Password</label>
+            <input id="login-password" type="password" required placeholder="••••••••"
+              class="w-full bg-white/10 border border-white/20 text-white placeholder-blue-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"/>
+          </div>
+          <button type="submit" id="login-btn"
+            class="w-full bg-white text-blue-900 font-bold py-3 rounded-xl text-sm hover:bg-blue-50 transition-colors mt-2">
+            Sign In
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="space-y-4 hidden">
+          <div>
+            <label class="block text-blue-100 text-xs font-medium mb-1.5">Full Name</label>
+            <input id="reg-name" type="text" required placeholder="Priya Sharma"
+              class="w-full bg-white/10 border border-white/20 text-white placeholder-blue-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"/>
+          </div>
+          <div>
+            <label class="block text-blue-100 text-xs font-medium mb-1.5">Email</label>
+            <input id="reg-email" type="email" required placeholder="you@example.com"
+              class="w-full bg-white/10 border border-white/20 text-white placeholder-blue-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"/>
+          </div>
+          <div>
+            <label class="block text-blue-100 text-xs font-medium mb-1.5">Password <span class="text-blue-300">(min 6 chars)</span></label>
+            <input id="reg-password" type="password" required placeholder="••••••••" minlength="6"
+              class="w-full bg-white/10 border border-white/20 text-white placeholder-blue-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"/>
+          </div>
+          <button type="submit" id="register-btn"
+            class="w-full bg-white text-blue-900 font-bold py-3 rounded-xl text-sm hover:bg-blue-50 transition-colors mt-2">
+            Create Account
+          </button>
+        </form>
+      </div>
+
+      <p class="text-center text-blue-300 text-xs mt-6">Your data is stored securely in the cloud ☁️</p>
+    </div>
+  </div>
+
+  <!-- ======= APP SHELL (shown after login) ======= -->
+  <div id="app-shell" class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 z-50 bg-slate-50 p-4 gap-2 shadow-xl shadow-blue-900/5">
+      <div class="flex items-center gap-3 px-4 py-8 mb-4">
+        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-white text-lg">person</span>
+        </div>
+        <div>
+          <p id="sidebar-name" class="font-headline font-bold text-blue-900 text-sm">Loading...</p>
+          <p class="text-xs text-slate-500">Personal Finance</p>
+        </div>
+      </div>
+      <nav class="flex flex-col gap-1 flex-1">
+        <a id="nav-dashboard" data-view="dashboard" class="nav-link active flex items-center gap-3 px-4 py-3 cursor-pointer">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-medium text-sm">Dashboard</span>
+        </a>
+        <a id="nav-transactions" data-view="transactions" class="nav-link flex items-center gap-3 px-4 py-3 cursor-pointer">
+          <span class="material-symbols-outlined">receipt_long</span>
+          <span class="font-medium text-sm">Transactions</span>
+        </a>
+      </nav>
+      <!-- Logout -->
+      <button id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors text-sm font-medium mt-auto">
+        <span class="material-symbols-outlined">logout</span>
+        <span>Sign Out</span>
+      </button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+
+      <!-- Top Bar -->
+      <header class="bg-blue-50/80 backdrop-blur-xl top-0 z-40 shadow-sm flex justify-between items-center w-full px-6 md:px-8 py-4 sticky">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-blue-900">account_balance</span>
+          <h1 class="font-headline font-extrabold text-blue-900 tracking-tight text-xl md:text-2xl">PaisaTrack</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <!-- Loading indicator -->
+          <div id="loading-spinner" class="hidden">
+            <div class="spinner" style="width:24px;height:24px;border-width:3px;"></div>
+          </div>
+          <div id="header-avatar" class="w-9 h-9 rounded-full bg-primary-container border-2 border-blue-200 flex items-center justify-center cursor-pointer">
+            <span class="material-symbols-outlined text-white text-base">person</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ===== DASHBOARD VIEW ===== -->
+      <div id="view-dashboard" class="view active p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full mb-24 md:mb-0">
+        <!-- Hero -->
+        <section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+          <div>
+            <span class="text-on-surface-variant font-label text-xs uppercase tracking-widest mb-2 block">Total Kharcha</span>
+            <h2 id="total-spent" class="text-primary font-headline text-5xl font-extrabold tracking-tighter">₹0.00</h2>
+            <p class="text-on-surface-variant text-sm mt-1" id="expense-count-label">No expenses recorded yet</p>
+          </div>
+          <button id="add-expense-btn" class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl shadow-lg hover:opacity-90 transition-opacity flex items-center gap-3 w-full md:w-auto justify-center">
+            <span class="material-symbols-outlined">add</span>
+            <span class="font-headline font-bold">Add Kharcha</span>
+          </button>
+        </section>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- Chart -->
+          <div class="md:col-span-8 bg-surface-container-lowest p-6 md:p-8 rounded-xl flex flex-col justify-between min-h-[280px]">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-headline text-xl font-bold text-on-surface">Kharcha Trend</h3>
+                <p class="text-on-surface-variant text-sm">Visualising your outflow</p>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-surface-container-low text-xs font-medium text-primary">This Week</span>
+            </div>
+            <div id="bar-chart" class="relative h-36 w-full mt-6 flex items-end justify-between gap-2 px-2"></div>
+            <div class="flex justify-between pt-3 text-[10px] uppercase tracking-widest text-on-surface-variant opacity-60" id="bar-labels"></div>
+          </div>
+
+          <!-- Summary Pillar -->
+          <div class="md:col-span-4 bg-surface-container-low p-6 md:p-8 rounded-xl flex flex-col justify-center space-y-6">
+            <div>
+              <span class="text-on-surface-variant font-label text-[10px] uppercase tracking-[0.2em]">Monthly Budget</span>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-3xl font-headline font-bold text-on-surface">₹10,000</span>
+                <span class="text-on-surface-variant text-sm">/ limit</span>
+              </div>
+              <div class="w-full h-1.5 bg-surface-container-highest rounded-full mt-3 overflow-hidden">
+                <div id="budget-bar" class="bg-secondary h-full rounded-full transition-all" style="width:0%"></div>
+              </div>
+              <p id="budget-pct" class="text-xs text-on-surface-variant mt-2">0% of budget used</p>
+            </div>
+            <div>
+              <span class="text-on-surface-variant font-label text-[10px] uppercase tracking-[0.2em]">Top Category</span>
+              <div class="flex items-center gap-3 mt-3">
+                <div class="w-11 h-11 bg-surface-container-lowest rounded-xl flex items-center justify-center text-primary shadow-sm">
+                  <span id="top-cat-icon" class="material-symbols-outlined">receipt_long</span>
+                </div>
+                <div>
+                  <p id="top-cat-name" class="font-headline font-bold text-on-surface text-sm">—</p>
+                  <p id="top-cat-amount" class="text-primary font-label font-bold text-sm">₹0.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent expenses -->
+          <div class="md:col-span-12 space-y-4">
+            <div class="flex justify-between items-center">
+              <h3 class="font-headline text-2xl font-bold text-blue-900">Recent Entries</h3>
+              <button id="view-all-btn" data-view="transactions" class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+                View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            </div>
+            <div id="expense-list" class="space-y-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TRANSACTIONS VIEW ===== -->
+      <div id="view-transactions" class="view p-4 md:p-8 space-y-6 max-w-7xl mx-auto w-full mb-24 md:mb-0">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 class="font-headline text-3xl font-bold text-blue-900">All Transactions</h2>
+            <p class="text-on-surface-variant text-sm mt-1">Your complete expense ledger</p>
+          </div>
+          <div class="flex items-center gap-3 flex-wrap">
+            <select id="category-filter" class="rounded-lg border-slate-300 text-sm focus:border-primary focus:ring-primary bg-white py-2 pr-8">
+              <option value="all">All Categories</option>
+              <option value="Food &amp; Dining">Food &amp; Dining</option>
+              <option value="Travel &amp; Transport">Travel &amp; Transport</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Rent &amp; Utilities">Rent &amp; Utilities</option>
+              <option value="Education">Education</option>
+              <option value="Health">Health</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Recharge &amp; Bills">Recharge &amp; Bills</option>
+              <option value="General">General</option>
+            </select>
+            <button id="txn-add-btn" class="flex items-center gap-2 bg-primary text-white text-sm px-4 py-2 rounded-xl hover:opacity-90 transition-opacity font-semibold">
+              <span class="material-symbols-outlined text-base">add</span> Add
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary chips -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-surface-container-lowest rounded-xl p-4 border border-slate-100">
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Total Spent</p>
+            <p id="txn-total" class="font-headline font-bold text-xl text-error">₹0.00</p>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-4 border border-slate-100">
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Transactions</p>
+            <p id="txn-count" class="font-headline font-bold text-xl text-on-surface">0</p>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-4 border border-slate-100">
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Avg. Kharcha</p>
+            <p id="txn-avg" class="font-headline font-bold text-xl text-on-surface">₹0.00</p>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-4 border border-slate-100">
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Biggest Spend</p>
+            <p id="txn-max" class="font-headline font-bold text-xl text-primary">₹0.00</p>
+          </div>
+        </div>
+
+        <div id="all-expense-list" class="space-y-3"></div>
+      </div>
+
+    </main>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center py-3 px-6 z-40">
+      <button data-view="dashboard" class="mob-nav-item active flex flex-col items-center gap-0.5 text-[10px]">
+        <span class="material-symbols-outlined text-[22px]">dashboard</span>
+        <span>Home</span>
+      </button>
+      <button data-view="transactions" class="mob-nav-item flex flex-col items-center gap-0.5 text-[10px]">
+        <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+        <span>Transactions</span>
+      </button>
+      <div id="mobile-add-btn" class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white -mt-7 shadow-xl cursor-pointer flex-shrink-0">
+        <span class="material-symbols-outlined text-2xl">add</span>
+      </div>
+      <button class="mob-nav-item flex flex-col items-center gap-0.5 text-[10px]">
+        <span class="material-symbols-outlined text-[22px]">analytics</span>
+        <span>Analytics</span>
+      </button>
+      <button id="mob-logout" class="mob-nav-item flex flex-col items-center gap-0.5 text-[10px]">
+        <span class="material-symbols-outlined text-[22px]">logout</span>
+        <span>Logout</span>
+      </button>
+    </div>
+
+  </div><!-- end app-shell -->
+
+  <!-- ======= ADD EXPENSE MODAL ======= -->
+  <div id="expense-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="font-headline text-xl font-bold text-blue-900">Add Kharcha</h3>
+        <button id="close-modal" class="text-slate-400 hover:text-slate-600 transition-colors p-1">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <form id="expense-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1" for="expense-name">Description / Merchant</label>
+          <input type="text" id="expense-name" required
+            class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+            placeholder="e.g. Zomato, Auto rickshaw, IRCTC">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1" for="expense-category">Category</label>
+          <select id="expense-category" class="w-full rounded-lg border-slate-300 focus:border-primary focus:ring-primary">
+            <option value="Food &amp; Dining">🍱 Food &amp; Dining</option>
+            <option value="Travel &amp; Transport">🚌 Travel &amp; Transport</option>
+            <option value="Shopping">🛍️ Shopping</option>
+            <option value="Rent &amp; Utilities">🏠 Rent &amp; Utilities</option>
+            <option value="Education">📚 Education</option>
+            <option value="Health">💊 Health</option>
+            <option value="Entertainment">🎬 Entertainment</option>
+            <option value="Recharge &amp; Bills">📱 Recharge &amp; Bills</option>
+            <option value="General">📋 General</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1" for="expense-amount">Amount (₹)</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <span class="text-slate-500 text-sm font-bold">₹</span>
+            </div>
+            <input type="number" id="expense-amount" step="0.01" min="1" required
+              class="w-full pl-8 rounded-lg border-slate-300 focus:border-primary focus:ring-primary"
+              placeholder="0.00">
+          </div>
+        </div>
+        <!-- Modal error -->
+        <div id="modal-error" class="hidden text-red-500 text-sm bg-red-50 rounded-lg px-3 py-2"></div>
+
+        <button type="submit" id="submit-expense-btn"
+          class="w-full bg-gradient-to-r from-primary to-primary-container text-white mt-2 py-3 rounded-xl font-bold shadow-md hover:opacity-90 transition-opacity">
+          Record Kharcha
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

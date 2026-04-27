@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #eef3f8;
+    color: #2c3e50;
+}
+
+h2 {
+    color: #1d3557;
+    margin-bottom: 12px;
+}
+
+form {
+    background: #ffffff;
+    border: 1px solid #d3dde9;
+    border-radius: 12px;
+    padding: 16px;
+    max-width: 460px;
+    box-shadow: 0 4px 10px rgba(31, 57, 88, 0.08);
+}
+
+label,
+input,
+button {
+    display: block;
+}
+
+input {
+    width: 100%;
+    max-width: 440px;
+    padding: 8px;
+    margin: 6px 0 14px;
+    border: 1px solid #b0c4d7;
+    border-radius: 8px;
+    background: #f9fbff;
+    color: #1f3f5b;
+}
+
+button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #3f75c9;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+button:focus {
+    background-color: #2b5ab2;
+}
+
+span {
+    color: #d6363c;
+    font-size: 12px;
+}
+
+table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 720px;
+    background: #ffffff;
+    border: 1px solid #d3dde9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(31, 57, 88, 0.08);
+}
+
+th,
+td {
+    padding: 12px 14px;
+    text-align: left;
+}
+
+th {
+    background-color: #3f75c9;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f6f9ff;
+}
+
+tr:hover {
+    background-color: #e8effb;
+}
+
+button[ng-click] {
+    background-color: #e74c3c;
+}
+
+button[ng-click]:hover {
+    background-color: #c0392b;
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,3 +12,77 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+    <title>Student Record System</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- External JS -->
+    <script src="app.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="script.css">
+</head>
+
+<body ng-controller="studentController">
+
+<h2>Student Record System</h2>
+
+<form name="studentForm" ng-submit="addStudent()" novalidate>
+
+    Name:
+    <input type="text" name="name" ng-model="student.name" required>
+    <span ng-show="studentForm.name.$touched && studentForm.name.$invalid">
+        Name required
+    </span>
+    <br><br>
+
+    Email:
+    <input type="email" name="email" ng-model="student.email" required>
+    <span ng-show="studentForm.email.$touched && studentForm.email.$invalid">
+        Valid email required
+    </span>
+    <br><br>
+
+    Age:
+    <input type="number" name="age" ng-model="student.age" min="18" required>
+    <span ng-show="studentForm.age.$invalid && studentForm.age.$touched">
+        Age must be 18+
+    </span>
+    <br><br>
+
+    <button type="submit" ng-disabled="studentForm.$invalid">
+        Add Student
+    </button>
+
+</form>
+
+<hr>
+
+<h3>Student List</h3>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Action</th>
+    </tr>
+
+    <tr ng-repeat="s in students">
+        <td>{{s.name}}</td>
+        <td>{{s.email}}</td>
+        <td>{{s.age}}</td>
+        <td>
+            <button ng-click="deleteStudent($index)">Delete</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+>>>>>>> 33ae6bd (Changes Done)
